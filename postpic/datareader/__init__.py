@@ -102,12 +102,16 @@ def chooseCode(code):
         Possible options are:
           - "DUMMY": dummy class creating fake data.
           - "EPOCH": .sdf files written by EPOCH1D, EPOCH2D or EPOCH3D.
+          - "PIConGPU": .h5 files written by PIConGPU
           - "VSIM": .hdf5 files written by VSim.
     '''
     if code in ['EPOCH', 'epoch', 'EPOCH1D', 'EPOCH2D', 'EPOCH3D']:
         from epochsdf import Sdfreader, Visitreader
         setdumpreadercls(Sdfreader)
         setsimreadercls(Visitreader)
+    elif code.lower() in ['picongpu']:
+        from picongpuh5 import Picongpuh5reader
+        setdumpreadercls(Picongpuh5reader)
     elif code in ['VSim', 'VSIM', 'vsim']:
         from vsimhdf5 import Hdf5reader, VSimReader
         setdumpreadercls(Hdf5reader)
